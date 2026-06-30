@@ -52,7 +52,8 @@ CREATE TABLE public.black_hole (
     gravity integer,
     galaxy_id integer,
     wormhole boolean DEFAULT false NOT NULL,
-    neighbour character varying(255)
+    neighbour character varying(255),
+    name character varying(255)
 );
 
 
@@ -89,7 +90,8 @@ CREATE TABLE public.galaxy (
     speed integer,
     description text,
     name character varying(255) NOT NULL,
-    habitated boolean DEFAULT false NOT NULL
+    habitated boolean DEFAULT false NOT NULL,
+    age integer
 );
 
 
@@ -163,7 +165,8 @@ CREATE TABLE public.planet (
     name character varying(255) NOT NULL,
     habitants numeric,
     time_travel boolean DEFAULT false NOT NULL,
-    star_id integer NOT NULL
+    star_id integer NOT NULL,
+    age integer
 );
 
 
@@ -200,7 +203,8 @@ CREATE TABLE public.star (
     color character varying(255) NOT NULL,
     name character varying(255) NOT NULL,
     galaxy_id integer,
-    constellation character varying(255)
+    constellation character varying(255),
+    age integer
 );
 
 
@@ -267,19 +271,22 @@ ALTER TABLE ONLY public.star ALTER COLUMN star_id SET DEFAULT nextval('public.st
 -- Data for Name: black_hole; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
+INSERT INTO public.black_hole VALUES (1, NULL, NULL, false, NULL, '1');
+INSERT INTO public.black_hole VALUES (2, NULL, NULL, false, NULL, '2');
+INSERT INTO public.black_hole VALUES (3, NULL, NULL, false, NULL, '3');
 
 
 --
 -- Data for Name: galaxy; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
-INSERT INTO public.galaxy VALUES (1, NULL, NULL, 'Andromeda', false);
-INSERT INTO public.galaxy VALUES (2, NULL, NULL, 'Milky Way', false);
-INSERT INTO public.galaxy VALUES (3, NULL, NULL, 'Alcyoneus', false);
-INSERT INTO public.galaxy VALUES (4, NULL, NULL, 'Large Magellanic Cloud', false);
-INSERT INTO public.galaxy VALUES (5, NULL, NULL, 'Sombrero Galaxy', false);
-INSERT INTO public.galaxy VALUES (6, NULL, NULL, 'Antennae Galaxies', false);
-INSERT INTO public.galaxy VALUES (7, NULL, NULL, 'Backward Galaxy', false);
+INSERT INTO public.galaxy VALUES (1, NULL, NULL, 'Andromeda', false, NULL);
+INSERT INTO public.galaxy VALUES (2, NULL, NULL, 'Milky Way', false, NULL);
+INSERT INTO public.galaxy VALUES (3, NULL, NULL, 'Alcyoneus', false, NULL);
+INSERT INTO public.galaxy VALUES (4, NULL, NULL, 'Large Magellanic Cloud', false, NULL);
+INSERT INTO public.galaxy VALUES (5, NULL, NULL, 'Sombrero Galaxy', false, NULL);
+INSERT INTO public.galaxy VALUES (6, NULL, NULL, 'Antennae Galaxies', false, NULL);
+INSERT INTO public.galaxy VALUES (7, NULL, NULL, 'Backward Galaxy', false, NULL);
 
 
 --
@@ -312,37 +319,37 @@ INSERT INTO public.moon VALUES (29, 'Callirhoe', 14, 'm', false);
 -- Data for Name: planet; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
-INSERT INTO public.planet VALUES (7, 'Earth', NULL, false, 7);
-INSERT INTO public.planet VALUES (8, 'Mercury', NULL, false, 2);
-INSERT INTO public.planet VALUES (9, 'Venus', NULL, false, 3);
-INSERT INTO public.planet VALUES (10, 'Mars', NULL, false, 4);
-INSERT INTO public.planet VALUES (11, 'Jupiter', NULL, false, 5);
-INSERT INTO public.planet VALUES (12, 'Saturn', NULL, false, 6);
-INSERT INTO public.planet VALUES (13, 'Pluto', NULL, false, 7);
-INSERT INTO public.planet VALUES (14, 'Ceres', NULL, false, 2);
-INSERT INTO public.planet VALUES (15, 'Eris', NULL, false, 3);
-INSERT INTO public.planet VALUES (16, 'Haumea', NULL, false, 4);
-INSERT INTO public.planet VALUES (17, 'Makemake', NULL, false, 5);
-INSERT INTO public.planet VALUES (18, 'Uranus', NULL, false, 6);
+INSERT INTO public.planet VALUES (7, 'Earth', NULL, false, 7, NULL);
+INSERT INTO public.planet VALUES (8, 'Mercury', NULL, false, 2, NULL);
+INSERT INTO public.planet VALUES (9, 'Venus', NULL, false, 3, NULL);
+INSERT INTO public.planet VALUES (10, 'Mars', NULL, false, 4, NULL);
+INSERT INTO public.planet VALUES (11, 'Jupiter', NULL, false, 5, NULL);
+INSERT INTO public.planet VALUES (12, 'Saturn', NULL, false, 6, NULL);
+INSERT INTO public.planet VALUES (13, 'Pluto', NULL, false, 7, NULL);
+INSERT INTO public.planet VALUES (14, 'Ceres', NULL, false, 2, NULL);
+INSERT INTO public.planet VALUES (15, 'Eris', NULL, false, 3, NULL);
+INSERT INTO public.planet VALUES (16, 'Haumea', NULL, false, 4, NULL);
+INSERT INTO public.planet VALUES (17, 'Makemake', NULL, false, 5, NULL);
+INSERT INTO public.planet VALUES (18, 'Uranus', NULL, false, 6, NULL);
 
 
 --
 -- Data for Name: star; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
-INSERT INTO public.star VALUES (2, 'Red', 'Altair', 1, 'Aquila');
-INSERT INTO public.star VALUES (3, 'Violet', 'Capella', 2, 'Auriga');
-INSERT INTO public.star VALUES (4, 'Indigo', 'Epsilon Aurigae', 3, 'Auriga');
-INSERT INTO public.star VALUES (5, 'Blue', 'Arcturus', 4, 'Bootes');
-INSERT INTO public.star VALUES (6, 'Green', 'Praesepe', 5, 'Cancer');
-INSERT INTO public.star VALUES (7, 'Yellow', 'Sirius', 6, 'Canis Major');
+INSERT INTO public.star VALUES (2, 'Red', 'Altair', 1, 'Aquila', NULL);
+INSERT INTO public.star VALUES (3, 'Violet', 'Capella', 2, 'Auriga', NULL);
+INSERT INTO public.star VALUES (4, 'Indigo', 'Epsilon Aurigae', 3, 'Auriga', NULL);
+INSERT INTO public.star VALUES (5, 'Blue', 'Arcturus', 4, 'Bootes', NULL);
+INSERT INTO public.star VALUES (6, 'Green', 'Praesepe', 5, 'Cancer', NULL);
+INSERT INTO public.star VALUES (7, 'Yellow', 'Sirius', 6, 'Canis Major', NULL);
 
 
 --
 -- Name: black_hole_black_hole_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.black_hole_black_hole_id_seq', 1, false);
+SELECT pg_catalog.setval('public.black_hole_black_hole_id_seq', 3, true);
 
 
 --
@@ -390,6 +397,14 @@ ALTER TABLE ONLY public.black_hole
 
 
 --
+-- Name: galaxy galaxy_age_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.galaxy
+    ADD CONSTRAINT galaxy_age_key UNIQUE (age);
+
+
+--
 -- Name: galaxy galaxy_pkey; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
@@ -414,11 +429,27 @@ ALTER TABLE ONLY public.moon
 
 
 --
+-- Name: planet planet_age_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.planet
+    ADD CONSTRAINT planet_age_key UNIQUE (age);
+
+
+--
 -- Name: planet planet_pkey; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
 ALTER TABLE ONLY public.planet
     ADD CONSTRAINT planet_pkey PRIMARY KEY (planet_id);
+
+
+--
+-- Name: star star_age_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.star
+    ADD CONSTRAINT star_age_key UNIQUE (age);
 
 
 --
